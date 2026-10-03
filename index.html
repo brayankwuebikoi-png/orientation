@@ -1,116 +1,19 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIENTATION V2 - Cameroun</title>
-<style>
-:root{--bleu:#0048ff;--vert:#10b981;--fond:#f5f8ff}
-body{font-family:Inter,Arial;background:var(--fond);margin:0;padding:12px}
-.app{max-width:750px;margin:auto;background:white;border-radius:24px;box-shadow:0 10px 40px rgba(0,0,0,.1);overflow:hidden}
-.header{background:var(--bleu);color:white;padding:24px;text-align:center}
-.header h1{margin:0;letter-spacing:6px;font-size:34px}
-.header p{opacity:.9;margin:5px 0 0}
-.content{padding:22px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-label{font-weight:700;font-size:13px;margin-top:14px;display:block;color:#333}
-input,select{width:100%;padding:13px;border:1.5px solid #dbe2ff;border-radius:12px;font-size:15px;box-sizing:border-box;background:#fbfdff}
-.full{grid-column:1 / -1}
-button.main{width:100%;background:var(--bleu);color:white;border:none;padding:18px;border-radius:14px;font-size:18px;font-weight:800;margin-top:20px;cursor:pointer}
-.card{border:1px solid #e5e7eb;border-radius:16px;padding:16px;margin-top:14px;display:none}
-.card.show{display:block}
-.badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700;margin-right:6px}
-.ok{background:#d1fae5;color:#065f46} .warn{background:#fef3c7;color:#92400e} .bad{background:#fee2e2;color:#991b1b}
-.ecole{border-left:4px solid var(--bleu);padding-left:12px;margin:14px 0}
-.small{font-size:13px;color:#666}
-</style>
-</head>
-<body>
-<div class="app">
-<div class="header">
-<h1>ORIENTATION</h1>
-<p>V2 - Analyse par matière | Cameroun 2026 | Source MINESUP</p>
-</div>
-<div class="content">
-<label>Série Bac</label>
-<select id="serie"><option value="A">Bac A - Littéraire</option><option value="C">Bac C - Maths</option><option value="D">Bac D - Sciences</option><option value="TI">Bac TI - Info</option><option value="E">Bac E - Technique Maths</option><option value="F">Bac F - Technique Industriel</option></select>
-
-<div class="grid">
-<div><label>Moyenne Terminale /20</label><input id="moyT" type="number" step="0.1" placeholder="12.5"></div>
-<div><label>Moyenne BAC /20</label><input id="moyB" type="number" step="0.01" placeholder="11.80"></div>
-<div><label>Maths /20</label><input id="nMaths" type="number" placeholder="Ex: 14"></div>
-<div><label>Physique-Chimie /20</label><input id="nPC" type="number" placeholder="Ex: 10"></div>
-<div><label>SVT / Biologie /20</label><input id="nSVT" type="number" placeholder="Ex: 13"></div>
-<div><label>Philo / Littérature /20</label><input id="nPhilo" type="number" placeholder="Ex: 11"></div>
-</div>
-
-<label>Tu préfères ?</label>
-<select id="pref"><option value="bureau">Travail au bureau / ordi</option><option value="terrain">Travail sur le terrain</option><option value="soins">Soigner / aider les gens</option><option value="creatif">Créer / parler / enseigner</option></select>
-
-<label>Budget famille / an</label>
-<select id="budget"><option value="faible">< 300.000 FCFA</option><option value="moyen">300k - 800k FCFA</option><option value="eleve">> 800k FCFA</option></select>
-
-<button class="main" onclick="orienter()">GÉNÉRER MON ORIENTATION V2 →</button>
-
-<div id="res" class="card"></div>
-<button onclick="window.print()" style="width:100%;margin-top:10px;padding:12px;border-radius:10px;border:1px solid #ccc;background:white">📄 Télécharger en PDF</button>
-<p class="small" style="text-align:center;margin-top:14px">Sauvegarde auto activée. Fonctionne sans internet. Données basées sur concours 2025-2026 MINESUP.</p>
-</div>
-</div>
-
-<script>
-function orienter(){
- const s=document.getElementById('serie').value;
- const mT=parseFloat(document.getElementById('moyT').value)||0;
- const mB=parseFloat(document.getElementById('moyB').value)||0;
- const maths=parseFloat(document.getElementById('nMaths').value)||0;
- const pc=parseFloat(document.getElementById('nPC').value)||0;
- const svt=parseFloat(document.getElementById('nSVT').value)||0;
- const philo=parseFloat(document.getElementById('nPhilo').value)||0;
- const pref=document.getElementById('pref').value;
- const budget=document.getElementById('budget').value;
- const box=document.getElementById('res');
- if(!mB){alert('Mets au moins ta moyenne au BAC');return;}
-
- let statut = mB>=10 ? 'ADMIS' : (mB>=9.5 ? 'REPÊCHABLE' : 'AJOURNÉ');
- let mentions = mB>=16?'Excellent':mB>=14?'Bien':mB>=12?'Assez Bien':mB>=10?'Passable':mB>=9.5?'Repêchage possible':'Insuffisant';
-
- let plans=[];
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Orientation.cm - Guide Post-Bac Cameroun</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet"><style>body{font-family:'Plus Jakarta Sans',sans-serif}</style></head><body class="bg-[#f7f5ff]"><header class="bg-white sticky top-0 z-10 p-4 flex justify-between items-center border-b"><b class="text-[#5b2cd6] text-xl">ORIENTATION.CM</b><a href="#" class="bg-[#5b2cd6] text-white px-4 py-2 rounded-full text-xs font-bold">Rejoindre WhatsApp</a></header><div class="bg-[#5b2cd6] text-white p-8 pb-16 text-center"><h1 class="text-[32px] font-[800] leading-tight">Trouve ta voie après le Bac</h1><p class="opacity-80 mt-3">Le seul guide qui regroupe toutes les écoles du Cameroun</p><div class="bg-white p-2 rounded-[20px] flex gap-2 max-w-2xl mx-auto mt-6 shadow-xl"><input id="q" oninput="go()" placeholder="Ex: Informatique, Douala, Médecine..." class="flex-1 p-3 text-black outline-none rounded-xl"><button class="bg-[#5b2cd6] px-6 rounded-xl font-bold">Chercher</button></div></div><div class="max-w-5xl mx-auto p-4 -mt-8 grid grid-cols-1 md:grid-cols-2 gap-4" id="grid"></div><script>
+const data=[
+{name:"Université de Yaoundé I",loc:"Yaoundé",dom:"Informatique, Droit, Médecine",type:"Publique"},
+{name:"IAI Cameroun - Centre d'Excellence",loc:"Yaoundé, Douala",dom:"Génie Logiciel, Réseaux, Cybersécurité",type:"Privée"},
+{name:"ENSPY - Polytech Yaoundé",loc:"Yaoundé",dom:"Génie Civil, Informatique, Industriel",type:"Concours"},
+{name:"ENSET Douala",loc:"Douala",dom:"Génie Mécanique, Electrique, Informatique",type:"Concours"},
+{name:"FMSB - Médecine",loc:"Yaoundé",dom:"Médecine, Pharmacie, Odonto",type:"Très sélectif"},
+{name:"ESSEC Douala",loc:"Douala",dom:"Marketing, Finance, Comptabilité",type:"Publique"},
+{name:"Sup'PTIC",loc:"Yaoundé",dom:"Télécoms, Réseaux, Sécurité",type:"Bourse"},
+{name:"IUT de Douala",loc:"Douala",dom:"Génie Industriel, Informatique, GEA",type:"IUT"},
+{name:"Université de Buea",loc:"Buea",dom:"Informatique, Traduction, Sciences",type:"Anglophone"},
+{name:"Siantou Sup",loc:"Yaoundé",dom:"Informatique, Gestion, Réseau",type:"Privée"}
+];
+const grid=document.getElementById('grid');
+function render(list){grid.innerHTML=list.map(s=>`<div class="bg-white p-5 rounded-[20px] border shadow-sm"><div class="flex justify-between"><b>${s.name}</b><span class="text-[10px] bg-[#efeaff] text-[#5b2cd6] px-2 py-1 rounded-full h-fit">${s.type}</span></div><p class="text-sm text-gray-500 mt-1">📍 ${s.loc} • ${s.dom}</p><button class="mt-3 text-[#5b2cd6] text-sm font-bold">Voir les débouchés →</button></div>`).join('')}
+function go(){let v=q.value.toLowerCase();render(data.filter(s=>(s.name+s.loc+s.dom).toLowerCase().includes(v)))}
+render(data);
+</script><div class="text-center p-10 text-gray-400 text-sm">Fait par BRAYAN pour tous les bacheliers du Cameroun 🇨🇲<br>orientation.cm - 2026</div></body></html>
  
- // LOGIQUE CORRIGÉE PAR MATIÈRE
- if((s==='C' || s==='E' || s==='TI') && maths>=12 && mB>=12){
-   plans.push(`<div class=ecole><b>PLAN A - Polytechnique Yaoundé / Douala / Maroua</b><br><span class=badge>Condition: Maths ≥12 et Bac ≥12</span><span class=badge ok>Tu as ${maths} en Maths ✔️</span><br>Concours: 20.000 FCFA - Septembre<br>Débouché: Ingénieur Génie Civil / Info - 400k à 800k FCFA/mois<br>École publique, budget ${budget} compatible</div>`);
- }
- if((s==='C' || s==='D') && maths>=10 && pc>=10 && pref!=='soins'){
-   plans.push(`<div class=ecole><b>PLAN A/B - Filières Informatique / IA / Génie Logiciel</b><br>UIT Yaoundé I, IUT Douala, SUP'PTIC<br>Si maths=${maths} et PC=${pc} : très bon profil pour IA. Salaire junior dev à Yaoundé: 250k-500k</div>`);
- }
- if((s==='D' || s==='C') && svt>=12 && mB>=13.5){
-   plans.push(`<div class=ecole><b>PLAN A - Médecine FMSB Yaoundé / FMSP Douala / Garoua</b><br><span class=badge>Condition: Bac ≥13.5 et SVT ≥12</span> ${svt>=12?'<span class=badge ok>✔️</span>':'<span class=badge bad>SVT trop faible</span>'}<br>Concours: 30.000 FCFA - Très sélectif (5% admis)<br>Débouché: Médecin / Pharmacien</div>`);
- }
- if((s==='D') && svt>=10){
-   plans.push(`<div class=ecole><b>PLAN B SÛR - FASA Dschang / Faculté Sciences Ngoa-Ekellé / Soa</b><br>Biologie, Biochimie, Production animale - Pas de concours, sur dossier Bac ≥10<br>Budget faible compatible, parfait pour toi</div>`);
- }
- if(s==='A' || philo>=12 || pref==='creatif'){
-   plans.push(`<div class=ecole><b>PLAN A - Droit / Communication / ENS Yaoundé</b><br>UY1, UY2 Soa, Douala, Buea<br>Condition: Philo/Litt ≥11. Débouché: Enseignant, Avocat, Journaliste</div>`);
- }
- if(s==='F' || s==='E'){
-   plans.push(`<div class=ecole><b>PLAN A - ENSET Ebolowa / Bambili / IUT</b><br>Génie Mécanique, Électrique. Recrutement sur concours Bac ≥10 technique. Très recherché par entreprises industrielles Kribi, Douala</div>`);
- }
- if(mB<10 && mB>=9.5){
-   plans.push(`<div class=ecole style=border-color:#f59e0b><b>REPÊCHAGE - Tu as ${mB}</b><br>Demande de repêchage au MINESUP si tu as 9.5+ et bonne moyenne Terminale (${mT}). Alternative: IUT, BTS, Formation pro 1 an (AFOP, etc) puis passerelle en L2.</div>`);
- }
- if(mB<9.5){
-   plans.push(`<div class=ecole style=border-color:#ef4444><b>BAC NON OBTENU (${mB})</b><br>Ton point fort est ${maths>=svt?'Maths':'SVT/Bio'}. Refais avec focus sur matière faible. En attendant: Formation qualifiante ${pref} - 6 mois, puis Bac session 2027 plus fort.</div>`);
- }
- if(plans.length===0) plans.push(`<div class=ecole>Profil atypique. Viens en DM avec tes notes exactes, je te fais orientation perso.</div>`);
-
- // Sauvegarde auto
- localStorage.setItem('orientation_v2', JSON.stringify({s,mT,mB,maths,pc,svt,philo}));
-
- box.innerHTML=`<h3>ORIENTATION V2 - ${statut} | Mention: ${mentions}</h3><p class=small>Bac ${s} - Moy Bac ${mB} / Term ${mT}</p><hr>${plans.join('')}<p class=small style=margin-top:12px>Analyse: Maths ${maths}, PC ${pc}, SVT ${svt}, Philo ${philo}. Profil: ${pref}. Calcul fait le ${new Date().toLocaleDateString()}</p>`;
- box.classList.add('show');
- box.scrollIntoView({behavior:'smooth'});
-}
-</script>
-</body>
-</html>
